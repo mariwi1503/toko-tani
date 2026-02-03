@@ -22,8 +22,8 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose, type, mess
     consultation: {
       icon: Calendar,
       title: 'Konsultasi Dipesan!',
-      description: message || 'Jadwal konsultasi Anda telah dikonfirmasi. Kami akan mengirim reminder sebelum sesi dimulai.',
-      buttonText: 'Lihat Jadwal',
+      description: message || 'Konsultasi sudah dipesan',
+      buttonText: 'Lihat Detail',
       color: 'blue'
     },
     checkout: {

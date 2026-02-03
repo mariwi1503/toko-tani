@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   User, Settings, ShoppingBag, MessageCircle, Bookmark, Heart, 
   CreditCard, MapPin, Bell, HelpCircle, LogOut, ChevronRight,
-  Edit2, LogIn
+  Edit2, LogIn, ShieldCheck, Star, FileText, Wallet
 } from 'lucide-react';
 import { formatPrice } from '@/data/dummyData';
 
@@ -34,130 +34,78 @@ const ProfileView: React.FC<ProfileViewProps> = ({
   onLogout 
 }) => {
   const consumerMenuItems = [
-    { icon: ShoppingBag, label: 'Pesanan Saya', badge: '2', color: 'text-green-500' },
-    { icon: MessageCircle, label: 'Riwayat Konsultasi', badge: '3', color: 'text-blue-500' },
-    { icon: Bookmark, label: 'Artikel Tersimpan', color: 'text-amber-500' },
-    { icon: Heart, label: 'Wishlist', color: 'text-red-500' },
-    { icon: CreditCard, label: 'Metode Pembayaran', color: 'text-purple-500' },
-    { icon: MapPin, label: 'Alamat Pengiriman', color: 'text-cyan-500' },
+    { icon: ShoppingBag, label: 'Pesanan Saya', badge: '2', color: 'text-green-600', bg: 'bg-green-50' },
+    { icon: MessageCircle, label: 'Riwayat Konsultasi', badge: '3', color: 'text-blue-600', bg: 'bg-blue-50' },
+    { icon: Heart, label: 'Produk Favorit', color: 'text-red-600', bg: 'bg-red-50' },
+    { icon: CreditCard, label: 'Metode Pembayaran', color: 'text-purple-600', bg: 'bg-purple-50' },
   ];
 
   const expertMenuItems = [
-    { icon: MessageCircle, label: 'Jadwal Konsultasi', badge: '5', color: 'text-green-500' },
-    { icon: Edit2, label: 'Kelola Artikel', badge: '12', color: 'text-blue-500' },
-    { icon: CreditCard, label: 'Pendapatan', color: 'text-purple-500' },
+    { icon: MessageCircle, label: 'Sesi Konsultasi', badge: '5', color: 'text-green-600', bg: 'bg-green-50' },
+    { icon: FileText, label: 'Artikel Saya', badge: '12', color: 'text-blue-600', bg: 'bg-blue-50' },
+    { icon: Wallet, label: 'Dompet & Pendapatan', color: 'text-purple-600', bg: 'bg-purple-50' },
   ];
 
   const generalMenuItems = [
-    { icon: Bell, label: 'Notifikasi', color: 'text-gray-500' },
-    { icon: Settings, label: 'Pengaturan', color: 'text-gray-500' },
-    { icon: HelpCircle, label: 'Bantuan', color: 'text-gray-500' },
+    { icon: Bell, label: 'Notifikasi', color: 'text-gray-400', bg: 'bg-gray-50' },
+    { icon: Settings, label: 'Pengaturan', color: 'text-gray-400', bg: 'bg-gray-50' },
+    { icon: HelpCircle, label: 'Pusat Bantuan', color: 'text-gray-400', bg: 'bg-gray-50' },
   ];
 
   const menuItems = userRole === 'consumer' ? consumerMenuItems : expertMenuItems;
 
-  const recentOrders = [
-    { id: '1', status: 'processing', items: 3, total: 285000, date: '30 Jan 2026' },
-    { id: '2', status: 'shipped', items: 1, total: 125000, date: '28 Jan 2026' },
-  ];
-
-  const upcomingConsultations = [
-    { id: '1', client: 'Budi Santoso', time: '10:00', date: 'Hari ini', type: 'video' },
-    { id: '2', client: 'Siti Aminah', time: '14:00', date: 'Hari ini', type: 'chat' },
-    { id: '3', client: 'Ahmad Fauzan', time: '09:00', date: 'Besok', type: 'voice' },
-  ];
-
+  // Render State: Not Logged In
   if (!isLoggedIn) {
     return (
-      <div className="pb-20">
-        <div className="bg-gradient-to-br from-green-600 to-green-500 px-4 pt-4 pb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-white text-xl font-bold">Profil</h1>
-          </div>
-          <div className="bg-white rounded-2xl p-6 shadow-lg text-center">
-            <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <User size={40} className="text-gray-400" />
+      <div className="min-h-screen bg-gray-50 pb-24 font-sans animate-in fade-in duration-500">
+        <div className="bg-white px-6 pt-12 pb-10 rounded-b-[3rem] shadow-sm">
+          <div className="text-center">
+            <div className="w-24 h-24 bg-gray-100 rounded-[2.5rem] flex items-center justify-center mx-auto mb-6 shadow-inner">
+              <User size={48} className="text-gray-300" />
             </div>
-            <h2 className="font-bold text-gray-800 text-lg mb-1">Selamat Datang!</h2>
-            <p className="text-gray-500 text-sm mb-4">Masuk untuk mengakses semua fitur</p>
+            <h1 className="text-2xl font-black text-gray-900 mb-2">Mulai Perjalanan Anda</h1>
+            <p className="text-gray-400 text-sm mb-8 font-medium">Masuk untuk akses konsultasi ahli dan belanja kebutuhan tani</p>
             <button
               onClick={onLoginClick}
-              className="w-full py-3 bg-green-500 text-white font-semibold rounded-xl hover:bg-green-600 transition-colors flex items-center justify-center gap-2"
+              className="w-full py-4 bg-green-500 text-white font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-green-100 hover:bg-green-600 transition-all active:scale-95 flex items-center justify-center gap-3"
             >
-              <LogIn size={20} />
-              Masuk / Daftar
+              <LogIn size={20} /> Masuk Sekarang
             </button>
           </div>
         </div>
 
-        <div className="px-4 mt-6">
-          <h3 className="font-semibold text-gray-800 mb-3">Fitur untuk Anda</h3>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <ShoppingBag size={24} className="text-green-500 mb-2" />
-              <h4 className="font-medium text-gray-800 text-sm">Belanja Mudah</h4>
-              <p className="text-xs text-gray-500 mt-1">Beli bibit, pupuk, dan alat pertanian</p>
-            </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <MessageCircle size={24} className="text-blue-500 mb-2" />
-              <h4 className="font-medium text-gray-800 text-sm">Konsultasi Ahli</h4>
-              <p className="text-xs text-gray-500 mt-1">Tanya langsung ke ahli pertanian</p>
-            </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <Bookmark size={24} className="text-amber-500 mb-2" />
-              <h4 className="font-medium text-gray-800 text-sm">Simpan Artikel</h4>
-              <p className="text-xs text-gray-500 mt-1">Baca artikel kapan saja</p>
-            </div>
-            <div className="bg-white rounded-xl p-4 shadow-sm">
-              <Heart size={24} className="text-red-500 mb-2" />
-              <h4 className="font-medium text-gray-800 text-sm">Wishlist</h4>
-              <p className="text-xs text-gray-500 mt-1">Simpan produk favorit Anda</p>
-            </div>
+        <div className="p-6 grid grid-cols-2 gap-4">
+          <div className="bg-white rounded-[2rem] p-5 shadow-sm border border-gray-50">
+             <div className="w-10 h-10 bg-green-50 text-green-500 rounded-xl flex items-center justify-center mb-3"><ShoppingBag size={20}/></div>
+             <h4 className="font-black text-gray-800 text-xs uppercase tracking-tight">Belanja Mudah</h4>
+             <p className="text-[10px] text-gray-400 mt-1 font-bold">Pupuk & Bibit Unggul</p>
           </div>
-        </div>
-
-        <div className="px-4 mt-6 mb-4">
-          <h3 className="font-semibold text-gray-800 mb-3">Umum</h3>
-          <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-            {generalMenuItems.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <button
-                  key={item.label}
-                  className={`w-full flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors ${
-                    index !== generalMenuItems.length - 1 ? 'border-b border-gray-100' : ''
-                  }`}
-                >
-                  <div className={`w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center ${item.color}`}>
-                    <Icon size={20} />
-                  </div>
-                  <span className="flex-1 text-left font-medium text-gray-700">{item.label}</span>
-                  <ChevronRight size={20} className="text-gray-400" />
-                </button>
-              );
-            })}
+          <div className="bg-white rounded-[2rem] p-5 shadow-sm border border-gray-100">
+             <div className="w-10 h-10 bg-blue-50 text-blue-500 rounded-xl flex items-center justify-center mb-3"><MessageCircle size={20}/></div>
+             <h4 className="font-black text-gray-800 text-xs uppercase tracking-tight">Konsultasi</h4>
+             <p className="text-[10px] text-gray-400 mt-1 font-bold">Tanya Langsung Ahli</p>
           </div>
-        </div>
-
-        <div className="text-center pb-4">
-          <p className="text-xs text-gray-400">Halo Trubus v1.0.0</p>
         </div>
       </div>
     );
   }
 
+  // Render State: Logged In
   return (
-    <div className="pb-20">
-      <div className="bg-gradient-to-br from-green-600 to-green-500 px-4 pt-4 pb-8">
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-white text-xl font-bold">Profil</h1>
-          <button className="p-2 bg-white/20 rounded-full">
-            <Settings size={20} className="text-white" />
-          </button>
-        </div>
+    <div className="min-h-screen bg-gray-50 pb-24 font-sans animate-in slide-in-from-bottom-4 duration-500">
+      {/* Profile Header Card */}
+      <div className="bg-white px-6 pt-12 pb-8 rounded-b-[3rem] shadow-sm relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-green-50 rounded-full -mr-16 -mt-16 z-0" />
+        
+        <div className="relative z-10">
+          <div className="flex items-center justify-between mb-8">
+            <h1 className="text-2xl font-black text-gray-900 tracking-tight">Profil Saya</h1>
+            <button className="p-3 bg-gray-50 rounded-2xl text-gray-400 hover:text-green-500 transition-colors">
+              <Settings size={20} />
+            </button>
+          </div>
 
-        <div className="bg-white rounded-2xl p-4 shadow-lg">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5 mb-8">
             <div className="relative">
               <img 
                 src={userData?.avatar || (userRole === 'consumer' 
@@ -165,219 +113,133 @@ const ProfileView: React.FC<ProfileViewProps> = ({
                   : 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=200'
                 )}
                 alt="Profile"
-                className="w-16 h-16 rounded-full object-cover"
+                className="w-20 h-20 rounded-[2rem] object-cover ring-4 ring-gray-50 shadow-md"
               />
-              <button className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+              <button className="absolute -bottom-1 -right-1 w-8 h-8 bg-green-500 border-4 border-white rounded-xl flex items-center justify-center shadow-lg">
                 <Edit2 size={12} className="text-white" />
               </button>
             </div>
             <div className="flex-1">
-              <h2 className="font-bold text-gray-800">
-                {userData?.name || (userRole === 'consumer' ? 'Budi Santoso' : 'Dr. Bambang Supriyadi')}
-              </h2>
-              <p className="text-sm text-gray-500">
-                {userData?.email || (userRole === 'consumer' ? 'budi.santoso@email.com' : 'dr.bambang@email.com')}
+              <div className="flex items-center gap-2 mb-1">
+                <h2 className="font-black text-xl text-gray-900 leading-tight">
+                  {userData?.name || (userRole === 'consumer' ? 'Budi Santoso' : 'Dr. Bambang S.')}
+                </h2>
+                {userData?.isVerified !== false && <ShieldCheck size={18} className="text-blue-500" />}
+              </div>
+              <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                {userRole === 'consumer' ? 'Petani Milenial' : 'Spesialis Hidroponik'}
               </p>
-              <div className="flex items-center gap-2 mt-1">
-                <span className={`text-xs px-2 py-0.5 rounded-full ${
-                  userRole === 'consumer' 
-                    ? 'bg-green-100 text-green-600' 
-                    : 'bg-blue-100 text-blue-600'
-                }`}>
-                  {userRole === 'consumer' ? 'Konsumen' : 'Ahli Pertanian'}
-                </span>
-                {userData?.isVerified && (
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-amber-100 text-amber-600">
-                    Terverifikasi
-                  </span>
-                )}
-              </div>
             </div>
           </div>
 
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <p className="text-xs text-gray-500 mb-2">Demo: Ganti Role</p>
-            <div className="flex gap-2">
-              <button
-                onClick={() => onRoleChange('consumer')}
-                className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  userRole === 'consumer'
-                    ? 'bg-green-500 text-white'
-                    : 'bg-gray-100 text-gray-600'
-                }`}
-              >
-                Konsumen
-              </button>
-              <button
-                onClick={() => onRoleChange('expert')}
-                className={`flex-1 py-2 rounded-lg text-sm font-medium transition-colors ${
-                  userRole === 'expert'
-                    ? 'bg-green-500 text-white'
-                    : 'bg-gray-100 text-gray-600'
-                }`}
-              >
-                Ahli
-              </button>
-            </div>
+          {/* Role Switcher - Style Tab yang sama dengan Modal */}
+          <div className="bg-gray-100 p-1.5 rounded-[1.5rem] flex">
+            <button
+              onClick={() => onRoleChange('consumer')}
+              className={`flex-1 py-3 rounded-[1.2rem] text-xs font-black uppercase tracking-wider transition-all ${
+                userRole === 'consumer' ? 'bg-white text-green-600 shadow-md' : 'text-gray-400'
+              }`}
+            >
+              Konsumen
+            </button>
+            <button
+              onClick={() => onRoleChange('expert')}
+              className={`flex-1 py-3 rounded-[1.2rem] text-xs font-black uppercase tracking-wider transition-all ${
+                userRole === 'expert' ? 'bg-white text-green-600 shadow-md' : 'text-gray-400'
+              }`}
+            >
+              Ahli
+            </button>
           </div>
         </div>
       </div>
 
-      {userRole === 'consumer' ? (
-        <div className="px-4 -mt-4">
-          <div className="bg-white rounded-xl shadow-sm p-4 grid grid-cols-3 gap-4">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-green-600">12</p>
-              <p className="text-xs text-gray-500">Pesanan</p>
-            </div>
-            <div className="text-center border-x border-gray-100">
-              <p className="text-2xl font-bold text-blue-600">5</p>
-              <p className="text-xs text-gray-500">Konsultasi</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-amber-600">28</p>
-              <p className="text-xs text-gray-500">Artikel Dibaca</p>
-            </div>
+      {/* Stats Cards */}
+      <div className="px-6 -mt-6 relative z-20">
+        <div className="bg-white rounded-[2rem] shadow-xl shadow-gray-200/50 p-6 flex justify-between border border-gray-50">
+          <div className="text-center flex-1">
+            <p className="text-lg font-black text-gray-900">{userRole === 'consumer' ? '12' : '2.4k'}</p>
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">Sesi</p>
           </div>
-        </div>
-      ) : (
-        <div className="px-4 -mt-4">
-          <div className="bg-white rounded-xl shadow-sm p-4 grid grid-cols-3 gap-4">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-green-600">2,456</p>
-              <p className="text-xs text-gray-500">Konsultasi</p>
-            </div>
-            <div className="text-center border-x border-gray-100">
-              <p className="text-2xl font-bold text-blue-600">12</p>
-              <p className="text-xs text-gray-500">Artikel</p>
-            </div>
-            <div className="text-center">
-              <p className="text-2xl font-bold text-amber-600">4.9</p>
-              <p className="text-xs text-gray-500">Rating</p>
-            </div>
+          <div className="w-px bg-gray-100 mx-2" />
+          <div className="text-center flex-1">
+            <p className="text-lg font-black text-gray-900">{userRole === 'consumer' ? '5' : '12'}</p>
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{userRole === 'consumer' ? 'Order' : 'Artikel'}</p>
           </div>
-        </div>
-      )}
-
-      {userRole === 'consumer' && (
-        <div className="px-4 mt-4">
-          <h3 className="font-semibold text-gray-800 mb-3">Pesanan Terbaru</h3>
-          <div className="space-y-3">
-            {recentOrders.map((order) => (
-              <div key={order.id} className="bg-white rounded-xl p-4 shadow-sm">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm text-gray-500">#{order.id} • {order.date}</span>
-                  <span className={`text-xs px-2 py-1 rounded-full ${
-                    order.status === 'processing' 
-                      ? 'bg-amber-100 text-amber-600' 
-                      : 'bg-blue-100 text-blue-600'
-                  }`}>
-                    {order.status === 'processing' ? 'Diproses' : 'Dikirim'}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-700">{order.items} item</span>
-                  <span className="font-semibold text-green-600">{formatPrice(order.total)}</span>
-                </div>
-              </div>
-            ))}
+          <div className="w-px bg-gray-100 mx-2" />
+          <div className="text-center flex-1">
+            <p className="text-lg font-black text-gray-900">{userRole === 'consumer' ? '28' : '4.9'}</p>
+            <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{userRole === 'consumer' ? 'Simpan' : 'Rating'}</p>
           </div>
-        </div>
-      )}
-
-      {userRole === 'expert' && (
-        <div className="px-4 mt-4">
-          <h3 className="font-semibold text-gray-800 mb-3">Jadwal Hari Ini</h3>
-          <div className="space-y-3">
-            {upcomingConsultations.map((consult) => (
-              <div key={consult.id} className="bg-white rounded-xl p-4 shadow-sm flex items-center gap-3">
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                  consult.type === 'video' ? 'bg-blue-100' :
-                  consult.type === 'voice' ? 'bg-green-100' : 'bg-amber-100'
-                }`}>
-                  <MessageCircle size={20} className={
-                    consult.type === 'video' ? 'text-blue-600' :
-                    consult.type === 'voice' ? 'text-green-600' : 'text-amber-600'
-                  } />
-                </div>
-                <div className="flex-1">
-                  <p className="font-medium text-gray-800">{consult.client}</p>
-                  <p className="text-sm text-gray-500">{consult.date} • {consult.time}</p>
-                </div>
-                <span className="text-xs px-2 py-1 rounded-full bg-gray-100 text-gray-600 capitalize">
-                  {consult.type}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div className="px-4 mt-6">
-        <h3 className="font-semibold text-gray-800 mb-3">
-          {userRole === 'consumer' ? 'Menu Saya' : 'Menu Ahli'}
-        </h3>
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-          {menuItems.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <button
-                key={item.label}
-                className={`w-full flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors ${
-                  index !== menuItems.length - 1 ? 'border-b border-gray-100' : ''
-                }`}
-              >
-                <div className={`w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center ${item.color}`}>
-                  <Icon size={20} />
-                </div>
-                <span className="flex-1 text-left font-medium text-gray-700">{item.label}</span>
-                {item.badge && (
-                  <span className="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
-                    {item.badge}
-                  </span>
-                )}
-                <ChevronRight size={20} className="text-gray-400" />
-              </button>
-            );
-          })}
         </div>
       </div>
 
-      <div className="px-4 mt-4">
-        <h3 className="font-semibold text-gray-800 mb-3">Umum</h3>
-        <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-          {generalMenuItems.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <button
-                key={item.label}
-                className={`w-full flex items-center gap-4 p-4 hover:bg-gray-50 transition-colors ${
-                  index !== generalMenuItems.length - 1 ? 'border-b border-gray-100' : ''
-                }`}
-              >
-                <div className={`w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center ${item.color}`}>
-                  <Icon size={20} />
-                </div>
-                <span className="flex-1 text-left font-medium text-gray-700">{item.label}</span>
-                <ChevronRight size={20} className="text-gray-400" />
-              </button>
-            );
-          })}
+      {/* Menu Sections */}
+      <div className="p-6 space-y-8">
+        {/* Main Menu */}
+        <div>
+          <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4 ml-2">Aktivitas Saya</h3>
+          <div className="bg-white rounded-[2.2rem] shadow-sm overflow-hidden border border-gray-100">
+            {menuItems.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.label}
+                  className={`w-full flex items-center gap-4 p-5 hover:bg-gray-50 transition-all active:scale-[0.98] ${
+                    index !== menuItems.length - 1 ? 'border-b border-gray-50' : ''
+                  }`}
+                >
+                  <div className={`w-12 h-12 rounded-2xl ${item.bg} ${item.color} flex items-center justify-center shadow-sm`}>
+                    <Icon size={22} />
+                  </div>
+                  <span className="flex-1 text-left font-extrabold text-gray-700 text-sm">{item.label}</span>
+                  {item.badge && (
+                    <span className="bg-red-500 text-white text-[10px] font-black px-2.5 py-1 rounded-lg shadow-lg shadow-red-100">
+                      {item.badge}
+                    </span>
+                  )}
+                  <ChevronRight size={18} className="text-gray-300" />
+                </button>
+              );
+            })}
+          </div>
         </div>
-      </div>
 
-      <div className="px-4 mt-4 mb-4">
+        {/* General Menu */}
+        <div>
+          <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-4 ml-2">Dukungan</h3>
+          <div className="bg-white rounded-[2.2rem] shadow-sm overflow-hidden border border-gray-100">
+            {generalMenuItems.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <button
+                  key={item.label}
+                  className={`w-full flex items-center gap-4 p-5 hover:bg-gray-50 transition-all ${
+                    index !== generalMenuItems.length - 1 ? 'border-b border-gray-50' : ''
+                  }`}
+                >
+                  <div className={`w-12 h-12 rounded-2xl ${item.bg} ${item.color} flex items-center justify-center`}>
+                    <Icon size={22} />
+                  </div>
+                  <span className="flex-1 text-left font-extrabold text-gray-700 text-sm">{item.label}</span>
+                  <ChevronRight size={18} className="text-gray-300" />
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Logout Button */}
         <button 
           onClick={onLogout}
-          className="w-full flex items-center justify-center gap-2 p-4 bg-red-50 text-red-600 rounded-xl font-medium hover:bg-red-100 transition-colors"
+          className="w-full flex items-center justify-center gap-3 p-5 bg-red-50 text-red-600 rounded-[2rem] font-black uppercase text-xs tracking-widest hover:bg-red-100 transition-all active:scale-95 border border-red-100/50"
         >
-          <LogOut size={20} />
-          Keluar
+          <LogOut size={18} /> Keluar Akun
         </button>
-      </div>
 
-      <div className="text-center pb-4">
-        <p className="text-xs text-gray-400">Halo Trubus v1.0.0</p>
+        <div className="text-center pt-4 pb-10">
+          <p className="text-[10px] text-gray-300 font-black uppercase tracking-widest">Halo Trubus Premium v1.0.0</p>
+        </div>
       </div>
     </div>
   );

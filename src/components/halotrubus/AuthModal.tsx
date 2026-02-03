@@ -41,8 +41,8 @@ const AuthModal: React.FC<AuthModalProps> = ({
   const [errors, setErrors] = useState<FormErrors>({});
 
   // Login form state
-  const [loginEmail, setLoginEmail] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
+  const [loginEmail, setLoginEmail] = useState('email@ku.com');
+  const [loginPassword, setLoginPassword] = useState('12345');
 
   // Register form state
   const [registerName, setRegisterName] = useState('');
@@ -171,8 +171,8 @@ const AuthModal: React.FC<AuthModalProps> = ({
   };
 
   const resetForms = () => {
-    setLoginEmail('');
-    setLoginPassword('');
+    // setLoginEmail('');
+    // setLoginPassword('');
     setRegisterName('');
     setRegisterEmail('');
     setRegisterPhone('');
@@ -209,7 +209,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
           <input
             type="email"
             value={loginEmail}
-            onChange={(e) => setLoginEmail(e.target.value)}
+            // onChange={(e) => setLoginEmail(e.target.value)}
             placeholder="nama@email.com"
             className={`w-full pl-10 pr-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 ${
               errors.email ? 'border-red-500' : 'border-gray-200'
@@ -226,7 +226,7 @@ const AuthModal: React.FC<AuthModalProps> = ({
           <input
             type={showPassword ? 'text' : 'password'}
             value={loginPassword}
-            onChange={(e) => setLoginPassword(e.target.value)}
+            // onChange={(e) => setLoginPassword(e.target.value)}
             placeholder="Masukkan password"
             className={`w-full pl-10 pr-12 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-green-500 ${
               errors.password ? 'border-red-500' : 'border-gray-200'

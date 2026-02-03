@@ -1,5 +1,8 @@
 import React from 'react';
-import { ChevronRight, Leaf, Sprout, FlaskConical, Bug, Wrench } from 'lucide-react';
+import { 
+  ChevronRight, Leaf, Sprout, FlaskConical, Bug, Wrench, 
+  Zap, MessageCircle, Star, ArrowRight, ShieldCheck 
+} from 'lucide-react';
 import { products, experts, articles, categories, Product, Expert, Article } from '@/data/dummyData';
 import ProductCard from './ProductCard';
 import ExpertCard from './ExpertCard';
@@ -17,11 +20,11 @@ interface HomeViewProps {
 }
 
 const categoryIcons: Record<string, React.ReactNode> = {
-  seeds: <Sprout size={24} />,
-  plants: <Leaf size={24} />,
-  fertilizers: <FlaskConical size={24} />,
-  pesticides: <Bug size={24} />,
-  tools: <Wrench size={24} />
+  seeds: <Sprout size={22} />,
+  plants: <Leaf size={22} />,
+  fertilizers: <FlaskConical size={22} />,
+  pesticides: <Bug size={22} />,
+  tools: <Wrench size={22} />
 };
 
 const HomeView: React.FC<HomeViewProps> = ({
@@ -39,73 +42,99 @@ const HomeView: React.FC<HomeViewProps> = ({
   const latestArticles = articles.slice(0, 4);
 
   return (
-    <div className="pb-20">
-      {/* Hero Banner */}
-      <div className="relative bg-gradient-to-br from-green-600 via-green-500 to-emerald-400 mx-4 mt-4 rounded-2xl overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <pattern id="leaves" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-              <path d="M10 0 Q15 5 10 10 Q5 5 10 0" fill="currentColor" />
-            </pattern>
-            <rect width="100" height="100" fill="url(#leaves)" />
-          </svg>
-        </div>
-        <div className="relative p-6">
-          <div className="flex items-start justify-between">
-            <div className="flex-1">
-              <h2 className="text-white text-xl font-bold mb-2">Konsultasi Pertanian</h2>
-              <p className="text-white/90 text-sm mb-4">Tanya langsung ke ahli pertanian berpengalaman</p>
+    <div className="pb-24 bg-gray-50/50 font-sans">
+      {/* --- HERO BANNER (SLIM & SCENIC) --- */}
+      <div className="relative mx-4 mt-6 overflow-hidden rounded-[2.5rem] bg-emerald-900 shadow-xl shadow-green-900/10">
+        {/* Background Image: Scenic Field */}
+        <img 
+          src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1000&q=80" 
+          alt="Agricultural Field"
+          className="absolute inset-0 h-full w-full object-cover opacity-50 transition-transform duration-700 hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-950 via-emerald-900/80 to-transparent" />
+        
+        {/* Decoration */}
+        <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-green-400/10 blur-3xl" />
+
+        <div className="relative p-6 px-8">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex-1 py-1">
+              <div className="mb-3 flex">
+                <span className="flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-[9px] font-black uppercase tracking-[0.2em] text-white backdrop-blur-md border border-white/10">
+                  <Sprout size={10} className="text-green-300" />
+                  Smart Farming
+                </span>
+              </div>
+              
+              <h2 className="text-xl font-black leading-tight text-white mb-2 tracking-tight">
+                Solusi Tani <br />Lebih Presisi
+              </h2>
+              
+              <p className="mb-5 text-[11px] font-bold text-green-50/70 leading-relaxed max-w-[180px]">
+                Konsultasi langsung di lahan Anda melalui bantuan ahli.
+              </p>
+
               <button 
                 onClick={onViewAllExperts}
-                className="bg-white text-green-600 px-5 py-2.5 rounded-full font-semibold text-sm hover:bg-green-50 transition-colors active:scale-95"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-green-500 px-5 py-2.5 text-[10px] font-black uppercase tracking-widest text-white transition-all active:scale-95 shadow-lg shadow-green-900/20"
               >
-                Konsultasi Sekarang
+                <span className="relative z-10 flex items-center gap-2">
+                  Mulai Sekarang <ArrowRight size={12} />
+                </span>
+                <div className="absolute inset-0 translate-x-[-100%] bg-green-400 transition-transform group-hover:translate-x-0" />
               </button>
             </div>
-            <img 
-              src="https://images.unsplash.com/photo-1592838064575-70ed626d3a0e?w=200" 
-              alt="Expert"
-              className="w-24 h-24 rounded-full object-cover border-4 border-white/30"
-            />
+
+            {/* Visual Plant Detail Circle */}
+            <div className="relative hidden xs:block">
+              <div className="h-24 w-24 rounded-full border-4 border-white/20 p-1 backdrop-blur-sm">
+                <img 
+                  src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?w=200" 
+                  className="h-full w-full rounded-full object-cover shadow-inner"
+                  alt="Plant Detail"
+                />
+              </div>
+              <div className="absolute -bottom-1 -right-1 flex h-8 w-8 items-center justify-center rounded-full bg-white text-green-600 shadow-lg">
+                <Leaf size={14} fill="currentColor" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Categories */}
-      <div className="px-4 mt-6">
-        <h3 className="text-lg font-bold text-gray-800 mb-4">Kategori</h3>
-        <div className="grid grid-cols-5 gap-2">
+      {/* --- CATEGORIES --- */}
+      <div className="px-6 mt-10">
+        <h3 className="text-[10px] font-black tracking-[0.2em] text-gray-400 uppercase mb-5">Kategori Utama</h3>
+        <div className="grid grid-cols-5 gap-3">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => onCategoryClick(cat.id)}
-              className="flex flex-col items-center p-3 bg-white rounded-xl shadow-sm hover:shadow-md transition-all active:scale-95"
+              className="group flex flex-col items-center gap-2 transition-all active:scale-90"
             >
-              <div className={`w-12 h-12 ${cat.color} rounded-full flex items-center justify-center text-white mb-2`}>
+              <div className={`flex h-14 w-14 items-center justify-center rounded-[1.5rem] shadow-sm transition-all group-hover:shadow-md group-hover:-translate-y-1 ${cat.color} text-white`}>
                 {categoryIcons[cat.id]}
               </div>
-              <span className="text-xs font-medium text-gray-700">{cat.name}</span>
+              <span className="text-[10px] font-black uppercase tracking-tighter text-gray-500">{cat.name}</span>
             </button>
           ))}
         </div>
       </div>
 
-      {/* Flash Sale */}
-      <div className="px-4 mt-6">
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <h3 className="text-lg font-bold text-gray-800">Flash Sale</h3>
-            <span className="bg-red-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">LIVE</span>
+      {/* --- FLASH SALE --- */}
+      <div className="px-6 mt-12">
+        <div className="mb-6 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <h3 className="text-xl font-black tracking-tight text-gray-900">Flash Sale</h3>
+            <div className="flex items-center gap-1 rounded-full bg-red-500 px-3 py-1 text-[9px] font-black text-white shadow-lg shadow-red-200 uppercase tracking-widest">
+              <Zap size={10} className="fill-white" /> Live
+            </div>
           </div>
-          <button 
-            onClick={onViewAllProducts}
-            className="flex items-center text-green-600 text-sm font-medium hover:text-green-700"
-          >
-            Lihat Semua
-            <ChevronRight size={18} />
+          <button onClick={onViewAllProducts} className="flex items-center gap-1 text-[11px] font-black uppercase tracking-widest text-green-600 hover:text-green-700">
+            Semua <ChevronRight size={16} />
           </button>
         </div>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           {featuredProducts.map((product) => (
             <ProductCard
               key={product.id}
@@ -117,126 +146,101 @@ const HomeView: React.FC<HomeViewProps> = ({
         </div>
       </div>
 
-      {/* Online Experts */}
-      <div className="mt-6">
-        <div className="flex items-center justify-between px-4 mb-4">
-          <div className="flex items-center gap-2">
-            <h3 className="text-lg font-bold text-gray-800">Ahli Online</h3>
-            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+      {/* --- ONLINE EXPERTS --- */}
+      <div className="mt-12">
+        <div className="mb-6 flex items-center justify-between px-6">
+          <div className="flex items-center gap-3">
+            <h3 className="text-xl font-black tracking-tight text-gray-900">Ahli Online</h3>
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500"></span>
+            </span>
           </div>
-          <button 
-            onClick={onViewAllExperts}
-            className="flex items-center text-green-600 text-sm font-medium hover:text-green-700"
-          >
+          <button onClick={onViewAllExperts} className="text-[11px] font-black uppercase tracking-widest text-green-600">
             Lihat Semua
-            <ChevronRight size={18} />
           </button>
         </div>
-        <div className="flex gap-3 overflow-x-auto px-4 pb-2 scrollbar-hide">
+        <div className="flex gap-4 overflow-x-auto px-6 pb-6 no-scrollbar">
           {onlineExperts.map((expert) => (
-            <ExpertCard
-              key={expert.id}
-              expert={expert}
-              onConsultClick={onExpertClick}
-              variant="compact"
-            />
+            <div key={expert.id} className="min-w-[140px] first:pl-0">
+              <ExpertCard
+                expert={expert}
+                onConsultClick={onExpertClick}
+                variant="compact"
+              />
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Promo Banner */}
-      <div className="px-4 mt-6">
-        <div className="relative bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl overflow-hidden">
-          <div className="p-5">
-            <span className="bg-white/20 text-white text-xs px-2 py-1 rounded-full">PROMO</span>
-            <h3 className="text-white text-lg font-bold mt-2">Diskon 20% Pupuk Organik</h3>
-            <p className="text-white/90 text-sm mt-1">Berlaku hingga 28 Februari 2026</p>
+      {/* --- PROMO BANNER --- */}
+      <div className="px-6 mt-6">
+        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-orange-500 to-amber-600 p-8 shadow-xl shadow-orange-200">
+          <div className="absolute -right-6 -top-6 h-32 w-32 rounded-full bg-white/10 blur-2xl" />
+          <div className="relative z-10">
+            <span className="inline-block rounded-lg bg-black/10 px-3 py-1 text-[10px] font-black uppercase tracking-widest text-white">
+              Spesial Hari Ini
+            </span>
+            <h3 className="mt-3 text-2xl font-black text-white leading-tight">Diskon 20% <br />Pupuk Organik</h3>
             <button 
               onClick={onViewAllProducts}
-              className="mt-3 bg-white text-orange-600 px-4 py-2 rounded-full font-semibold text-sm hover:bg-orange-50 transition-colors"
+              className="mt-6 rounded-2xl bg-white px-6 py-3 text-[11px] font-black uppercase tracking-widest text-orange-600 shadow-lg active:scale-95 transition-all hover:bg-orange-50"
             >
               Belanja Sekarang
             </button>
           </div>
-          <div className="absolute -right-4 -bottom-4 w-32 h-32 bg-white/10 rounded-full" />
-          <div className="absolute -right-8 -top-8 w-24 h-24 bg-white/10 rounded-full" />
+          <div className="absolute right-4 bottom-4 opacity-10 rotate-12">
+            <FlaskConical size={140} className="text-white" />
+          </div>
         </div>
       </div>
 
-      {/* Latest Articles */}
-      <div className="px-4 mt-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-bold text-gray-800">Artikel Terbaru</h3>
-          <button 
-            onClick={onViewAllArticles}
-            className="flex items-center text-green-600 text-sm font-medium hover:text-green-700"
-          >
-            Lihat Semua
-            <ChevronRight size={18} />
+      {/* --- LATEST ARTICLES --- */}
+      <div className="px-6 mt-14">
+        <div className="mb-6 flex items-center justify-between">
+          <h3 className="text-xl font-black tracking-tight text-gray-900">EduTani</h3>
+          <button onClick={onViewAllArticles} className="text-[11px] font-black uppercase tracking-widest text-green-600">
+            Baca Lagi
           </button>
         </div>
-        <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+        <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
           {latestArticles.map((article) => (
-            <ArticleCard
-              key={article.id}
-              article={article}
-              onArticleClick={onArticleClick}
-              variant="featured"
-            />
+            <div key={article.id} className="min-w-[280px]">
+              <ArticleCard
+                article={article}
+                onArticleClick={onArticleClick}
+                variant="featured"
+              />
+            </div>
           ))}
         </div>
       </div>
 
-      {/* Popular Products */}
-      <div className="px-4 mt-6">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-bold text-gray-800">Produk Populer</h3>
-          <button 
-            onClick={onViewAllProducts}
-            className="flex items-center text-green-600 text-sm font-medium hover:text-green-700"
-          >
-            Lihat Semua
-            <ChevronRight size={18} />
-          </button>
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          {products.slice(0, 4).map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onProductClick={onProductClick}
-              onAddToCart={onAddToCart}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Expert Consultation CTA */}
-      <div className="px-4 mt-6 mb-4">
-        <div className="bg-gradient-to-br from-green-700 to-green-600 rounded-2xl p-5">
-          <div className="flex items-center gap-4">
-            <div className="flex -space-x-3">
-              {experts.slice(0, 3).map((expert, i) => (
+      {/* --- BOTTOM CTA --- */}
+      <div className="px-6 mt-10 mb-8">
+        <div className="rounded-[3rem] bg-slate-900 p-8 text-center shadow-2xl shadow-slate-200 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-green-700 to-emerald-600" />
+          <div className="relative z-10">
+            <div className="mb-6 flex justify-center -space-x-4">
+              {experts.slice(0, 4).map((expert, i) => (
                 <img 
                   key={expert.id}
                   src={expert.image} 
-                  alt={expert.name}
-                  className="w-12 h-12 rounded-full border-2 border-green-600 object-cover"
-                  style={{ zIndex: 3 - i }}
+                  className="h-14 w-14 rounded-2xl border-4 border-green-600 object-cover shadow-lg"
+                  style={{ zIndex: 4 - i }}
+                  alt=""
                 />
               ))}
             </div>
-            <div className="flex-1">
-              <p className="text-white font-semibold">10+ Ahli Siap Membantu</p>
-              <p className="text-white/80 text-sm">Konsultasi masalah pertanian Anda</p>
-            </div>
+            <h4 className="text-xl font-black text-white mb-2 tracking-tight">Butuh Solusi Cepat?</h4>
+            <p className="text-sm font-medium text-green-50/80 mb-8 max-w-[240px] mx-auto">Tanya apa saja seputar pertanian kepada tim ahli kami.</p>
+            <button 
+              onClick={onViewAllExperts}
+              className="flex w-full items-center justify-center gap-3 rounded-[1.8rem] bg-white py-5 text-xs font-black uppercase tracking-[0.2em] text-green-600 shadow-xl transition-all active:scale-95 hover:bg-green-50"
+            >
+              <MessageCircle size={18} fill="currentColor" /> Hubungi Ahli
+            </button>
           </div>
-          <button 
-            onClick={onViewAllExperts}
-            className="w-full mt-4 bg-white text-green-700 py-3 rounded-xl font-semibold hover:bg-green-50 transition-colors active:scale-[0.98]"
-          >
-            Mulai Konsultasi
-          </button>
         </div>
       </div>
     </div>
